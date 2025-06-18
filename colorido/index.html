@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio SWOT Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Desafio SWOT Digital</h1>
+            <p class="subtitle">Jogo para levantamento e triagem de sugestões para elaboração da Matriz SWOT</p>
+            <div class="logo">3NEURON.COM</div>
+        </header>
+
+        <div class="instructions">
+            <h2>Como Jogar</h2>
+            <ul>
+                <li>Jogadores se movem pelo tabuleiro coletando fichas nas células S (Forças), W (Fraquezas), O
+                    (Oportunidades) e T (Ameaças)</li>
+                <li>Ao parar em uma célula com ficha, o jogador deve propor uma sugestão baseada na carta sorteada</li>
+                <li>Os outros jogadores votam se a sugestão deve ser incluída na Matriz SWOT</li>
+                <li>O jogo termina quando todas as fichas forem coletadas</li>
+                <li>Cada equipe seleciona até 5 sugestões para a Matriz SWOT Final</li>
+            </ul>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div>Jogador Atual</div>
+                <div class="status-value" id="currentPlayer">Jogador 1</div>
+            </div>
+            <div class="status-item">
+                <div>Fichas Restantes</div>
+                <div class="status-value" id="tokensRemaining">24</div>
+            </div>
+            <div class="status-item">
+                <div>Sugestões</div>
+                <div class="status-value" id="suggestionsCount">0</div>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="board-container">
+                <div class="board" id="gameBoard">
+                    <!-- O tabuleiro será gerado por JavaScript -->
+                </div>
+
+                <div class="card-display">
+                    <div class="card-header">Carta Sorteada</div>
+                    <div class="card-content" id="cardContent">
+                        Selecione uma célula com ficha para começar
+                    </div>
+
+                    <div class="form-group" id="suggestionInput" style="display: none;">
+                        <label for="suggestion">Sua Sugestão:</label>
+                        <textarea class="suggestion-input" id="suggestion"
+                            placeholder="Descreva sua sugestão para a Matriz SWOT..."></textarea>
+                        <button class="btn btn-success" id="submitSuggestion">Enviar Sugestão</button>
+                    </div>
+
+                    <div class="voting-buttons" id="votingButtons" style="display: none;">
+                        <button class="btn btn-success" id="voteYes">Incluir (Sim)</button>
+                        <button class="btn btn-danger" id="voteNo">Não Incluir (Não)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-info">
+                <h2>Jogadores</h2>
+                <ul class="player-list" id="playerList">
+                    <!-- Lista de jogadores será gerada por JavaScript -->
+                </ul>
+
+                <h2 style="margin-top: 20px;">Diário da Equipe</h2>
+                <div style="overflow-x: auto;">
+                    <table class="diary-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Categoria</th>
+                                <th>Sugestão</th>
+                            </tr>
+                        </thead>
+                        <tbody id="diaryBody">
+                            <!-- Conteúdo do diário será gerado por JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" id="diceRoll">Lançar Dado</button>
+                    <button class="btn btn-warning" id="endTurn">Finalizar Turno</button>
+                    <button class="btn btn-success" id="endGame">Finalizar Jogo</button>
+                    <button class="btn" id="newGame">Novo Jogo</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="suggestions">
+            <h2>Sugestões para Matriz SWOT Final (Máx. 5)</h2>
+            <div style="overflow-x: auto;">
+                <table class="diary-table">
+                    <thead>
+                        <tr>
+                            <th>Selecionar</th>
+                            <th>Categoria</th>
+                            <th>Sugestão</th>
+                        </tr>
+                    </thead>
+                    <tbody id="finalSuggestionsBody">
+                        <!-- Sugestões finais serão geradas por JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-success" style="margin-top: 15px; width: 100%;" id="submitFinal">Enviar Sugestões
+                Finais</button>
+        </div>
+    </div>
+
+    <div class="modal" id="playerModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 class="modal-title">Configurar Jogadores</h2>
+            <div class="form-group">
+                <label for="playerCount">Número de Jogadores (5-7, ímpar):</label>
+                <input type="number" class="form-control" id="playerCount" min="5" max="7" value="5">
+            </div>
+            <button class="btn btn-primary" id="startGame" style="width: 100%;">Iniciar Jogo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
