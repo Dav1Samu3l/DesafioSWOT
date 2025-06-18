@@ -35,12 +35,7 @@ Jogo digital baseado no jogo físico "Desafio SWOT" da 3NEURON.COM, desenvolvido
 - [ ] Correção de bugs específicos como: O jogo trava no 3º jogador
 - [ ] ...
 
-## feat: Implementar tabuleiro e lógica do jogo SWOT digital
-
-- Adicionada estrutura HTML para a interface do jogo, incluindo instruções, barra de status, área do tabuleiro e modal de configuração de jogadores.
-- Desenvolvida funcionalidade JavaScript para as mecânicas do jogo, como movimentação dos jogadores, rolagem de dados, envio de sugestões e sistema de votação.
-- Criados estilos CSS para um layout responsivo e visualmente atrativo, abrangendo botões, tabuleiro e modal.
-- Integradas atualizações dinâmicas para a lista de jogadores, diário de sugestões e tabela de sugestões finais.
+## Tecnologias
 - HTML5/CSS3/JavaScript
 - Bootstrap 4
 - jQuery
