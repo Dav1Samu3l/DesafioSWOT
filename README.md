@@ -1,4 +1,6 @@
-# Desafio SWOT Digital - Versão Web
+# Desafio SWOT Digital - Versão Web ( protótipo)
+
+
 
 ## Visão Geral
 Jogo digital baseado no jogo físico "Desafio SWOT" da 3NEURON.COM, desenvolvido para facilitar a criação colaborativa de matrizes SWOT em ambientes corporativos.
